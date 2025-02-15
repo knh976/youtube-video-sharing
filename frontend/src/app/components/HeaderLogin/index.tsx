@@ -1,17 +1,22 @@
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, Grid, TextField } from '@mui/material';
+import { fetchLogin } from '../../reducers/user';
+import { useAppDispatch, useAppSelector } from '../../hooks/useApp';
+import { API_STATUSES } from '../../constants';
 
-interface FormProps {
+export interface LoginFormProps {
   username?: string;
   password?: string;
 }
 const HeaderLogin = () => {
+  const dispatch = useAppDispatch();
+  const status = useAppSelector((state) => state.user.status);
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormProps>({
+  } = useForm<LoginFormProps>({
     defaultValues: {
       username: undefined,
       password: undefined,
@@ -19,7 +24,9 @@ const HeaderLogin = () => {
     mode: 'onSubmit',
   });
 
-  const onSubmit = async (data: FormProps) => {};
+  const onSubmit = async (data: LoginFormProps) => {
+    dispatch(fetchLogin(data));
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -64,7 +71,13 @@ const HeaderLogin = () => {
           />
         </Grid>
         <Grid item xs="auto" container alignItems="center">
-          <Button variant="outlined">Login / Register</Button>
+          <Button
+            variant="outlined"
+            type="submit"
+            disabled={status === API_STATUSES.loading}
+          >
+            Login / Register
+          </Button>
         </Grid>
       </Grid>
     </form>
