@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   post '/login', to: "sessions#login"
+  resources :shared_videos
 end

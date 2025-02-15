@@ -50,6 +50,7 @@ describe SharedYoutubeVideo::Create do
         shared_video = SharedVideo.first
 
         expect(subject.success?).to be_truthy
+        expect(subject.data).to eq shared_video
         expect(shared_video.user_id).to eq user_id
         expect(shared_video.user_share_url).to eq user_share_url
         expect(shared_video.video_id).to eq 'wJnBTPUQS5A'

@@ -1,5 +1,7 @@
 module SharedYoutubeVideo
   class Create < BaseService
+    attr_reader :data
+
     YOUTUBE_VIDEO_ID_REGEX = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/
 
     def initialize(user_id, user_share_url)
@@ -11,7 +13,7 @@ module SharedYoutubeVideo
       validate!
       return self unless success?
 
-      create_shared_video
+      @data = create_shared_video
 
       self
     end

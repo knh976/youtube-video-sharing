@@ -16,6 +16,8 @@ class Jwt
       true,
       { algorithm: ALGORITHM }
     ).first
+  rescue JWT::VerificationError
+    nil
   end
 
   def self.auth_secret

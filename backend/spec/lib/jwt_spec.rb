@@ -45,9 +45,21 @@ describe Jwt do
         )
         .and_return([payload])
 
-      expect(
-        described_class.decode(jwt)
-      ).to eq payload
+      expect(described_class.decode(jwt)).to eq payload
+    end
+
+    it 'invoke params correctly and raise error' do
+      expect(JWT)
+        .to receive(:decode)
+        .with(
+          'jwt_token',
+          auth_secret,
+          true,
+          { algorithm: described_class::ALGORITHM }
+        )
+        .and_raise(JWT::VerificationError)
+
+      expect(described_class.decode(jwt)).to be_nil
     end
   end
 end
