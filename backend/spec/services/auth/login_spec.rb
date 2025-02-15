@@ -42,7 +42,7 @@ describe Auth::Login do
       let(:username) { 'xyz' }
       let(:password) { 'correct_password' }
 
-      it 'returns error' do
+      it 'returns user and jwt' do
         expect { subject.call }.to change { User.count }.from(1).to(2)
 
         expect(subject.success?).to be_truthy
