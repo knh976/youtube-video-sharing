@@ -1,11 +1,21 @@
-// Uncomment this line to use CSS modules
-// import styles from './app.module.scss';
-import NxWelcome from './nx-welcome';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import styles from './app.module.scss';
+import Header from './components/Header';
+import HeaderLogin from './components/HeaderLogin';
+import HeaderLoggedIn from './components/HeaderLoggedIn';
+import { ROUTES } from './constants';
 
 export function App() {
+  const isLoggedIn = true;
+
   return (
-    <div>
-      <NxWelcome title="frontend" />
+    <div className={styles.root}>
+      <Header>{isLoggedIn ? <HeaderLoggedIn /> : <HeaderLogin />}</Header>
+      <Routes>
+        <Route path={ROUTES.home} element={<div>Home</div>} />
+        <Route path={ROUTES.share} element={<div>Share</div>} />
+      </Routes>
     </div>
   );
 }
