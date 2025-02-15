@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_15_133835) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_15_170418) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "shared_videos", force: :cascade do |t|
+    t.string "video_id"
+    t.string "video_url"
+    t.string "video_title"
+    t.string "video_description"
+    t.string "user_share_url"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_shared_videos_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
@@ -22,4 +34,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_15_133835) do
     t.index ["username"], name: "idx_username_on_user", unique: true
   end
 
+  add_foreign_key "shared_videos", "users"
 end
