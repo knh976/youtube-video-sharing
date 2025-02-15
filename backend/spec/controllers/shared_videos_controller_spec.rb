@@ -48,4 +48,29 @@ RSpec.describe SharedVideosController, type: :controller do
       end
     end
   end
+
+  describe 'GET /shared_videos', type: :request do
+    let(:path) { '/shared_videos' }
+    let(:response_body) { JSON.parse(response.body) }
+
+    before do
+      expect(SharedYoutubeVideo::GetList)
+        .to receive(:new)
+        .and_return(
+          double(
+            call: nil,
+            success?: true,
+            data: []
+          )
+        )
+    end
+
+    it 'responses 200' do
+      get path
+
+      expect(response).to have_http_status(:ok)
+      expect(response_body).to eq []
+    end
+  end
+
 end

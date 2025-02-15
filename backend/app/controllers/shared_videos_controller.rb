@@ -11,4 +11,12 @@ class SharedVideosController < ApplicationController
       render json: { error_message: service.errors.first.message }, status: :bad_request
     end
   end
+
+  def index
+    service = SharedYoutubeVideo::GetList.new
+    service.call
+
+    render json: service.data, status: :ok
+  end
+
 end
