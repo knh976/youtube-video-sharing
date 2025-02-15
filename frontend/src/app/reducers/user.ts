@@ -3,6 +3,7 @@ import axios from 'axios';
 import { API_DOMAIN, API_STATUSES, COOKIE_KEYS } from '../constants';
 import { Cookies } from 'react-cookie';
 import { LoginFormProps } from '../components/HeaderLogin';
+import { getToken, getUsername } from '../helpers/cookies';
 
 interface UserState {
   status: string;
@@ -31,9 +32,8 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setLoggedIn: (state) => {
-      const cookie = new Cookies();
-      state.token = cookie.get(COOKIE_KEYS.token);
-      state.username = cookie.get(COOKIE_KEYS.username);
+      state.token = getToken();
+      state.username = getUsername();
     },
     logout: (state) => {
       const cookie = new Cookies();

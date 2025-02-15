@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import Header from '../index';
 
-describe('App', () => {
+describe('Header', () => {
   it('should render correctly', () => {
     const { getByText } = render(
       <Header>

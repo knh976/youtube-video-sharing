@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Grid, TextField, Typography } from '@mui/material';
-import { ROUTES } from '../../constants';
+import { API_STATUSES, ROUTES } from '../../constants';
+import { useAppDispatch, useAppSelector } from '../../hooks/useApp';
+import { shareMovie } from '../../reducers/shareMovie';
+import useUser from '../../hooks/useUser';
 
 const Share = () => {
+  const dispatch = useAppDispatch();
+  const status = useAppSelector((state) => state.shareMovie.status);
+  const { isAuth } = useUser();
   const navigate = useNavigate();
-  const [url, setUrl] = useState<string>();
+  const [url, setUrl] = useState<string>('');
 
   const onChangeUrl = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -13,9 +19,20 @@ const Share = () => {
     setUrl(event.target.value);
   };
 
-  const onClickShare = () => {
-    console.log(url);
-    navigate(ROUTES.home);
+  const onClickShare = async () => {
+    if (!isAuth) {
+      alert('Please login');
+      return;
+    }
+    const response = await dispatch(shareMovie(url));
+    // @ts-ignore
+    const errorMessage = response?.error?.message;
+
+    if (errorMessage) {
+      alert(errorMessage);
+    } else {
+      navigate(ROUTES.home);
+    }
   };
 
   return (
@@ -32,6 +49,7 @@ const Share = () => {
                   </Grid>
                   <Grid item xs={8}>
                     <TextField
+                      label="url"
                       size="small"
                       fullWidth
                       value={url}
@@ -42,7 +60,12 @@ const Share = () => {
                 <Grid item xs={12} container spacing={2}>
                   <Grid xs={3} />
                   <Grid item xs={8}>
-                    <Button variant="outlined" fullWidth onClick={onClickShare}>
+                    <Button
+                      variant="outlined"
+                      fullWidth
+                      onClick={onClickShare}
+                      disabled={status === API_STATUSES.loading}
+                    >
                       Share
                     </Button>
                   </Grid>

@@ -3,8 +3,8 @@ import HeaderLoggedIn from '../index';
 import { renderWithApp } from '../../../helpers/testWithContext';
 import { fireEvent } from '@testing-library/react';
 
-describe('App', () => {
-  it('should render correctly', () => {
+describe('HeaderLoggedIn', () => {
+  it('should dispatch actions correctly', () => {
     const initState = {
       user: {
         username: 'abc_xyz',

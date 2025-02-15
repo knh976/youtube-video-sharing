@@ -3,8 +3,8 @@ import HeaderLogin from '../index';
 import { renderWithApp } from '../../../helpers/testWithContext';
 import { fireEvent, waitFor } from '@testing-library/react';
 
-describe('App', () => {
-  it('should render correctly', async () => {
+describe('HeaderLogin', () => {
+  it('should dispatch actions correctly', async () => {
     const initState = {
       user: {
         status: 'idle',
