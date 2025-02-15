@@ -4,6 +4,7 @@ import styles from './app.module.scss';
 import Header from './components/Header';
 import HeaderLogin from './components/HeaderLogin';
 import HeaderLoggedIn from './components/HeaderLoggedIn';
+import Share from './components/Share';
 import { ROUTES } from './constants';
 
 export function App() {
@@ -14,7 +15,7 @@ export function App() {
       <Header>{isLoggedIn ? <HeaderLoggedIn /> : <HeaderLogin />}</Header>
       <Routes>
         <Route path={ROUTES.home} element={<div>Home</div>} />
-        <Route path={ROUTES.share} element={<div>Share</div>} />
+        <Route path={ROUTES.share} element={<Share />} />
       </Routes>
     </div>
   );
