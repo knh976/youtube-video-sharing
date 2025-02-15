@@ -16,7 +16,6 @@ class SharedVideosController < ApplicationController
     service = SharedYoutubeVideo::GetList.new
     service.call
 
-    render json: service.data, status: :ok
+    render json: service.data, each_serializer: ShareVideoSerializer, status: :ok
   end
-
 end

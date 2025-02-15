@@ -11,7 +11,7 @@ module SharedYoutubeVideo
     private
 
     def get_shared_videos
-      SharedVideo.all
+      SharedVideo.includes(:user).order(created_at: :DESC)
     end
   end
 end
