@@ -1,3 +1,5 @@
+ENV['RAILS_ENV'] ||= 'test'
+
 require File.expand_path('../config/environment', __dir__)
 
 require 'rspec/rails'
@@ -89,4 +91,6 @@ RSpec.configure do |config| # rubocop:disable Metrics/BlockLength
   config.after(:all) do
     DatabaseCleaner.clean
   end
+
+  config.render_views
 end
