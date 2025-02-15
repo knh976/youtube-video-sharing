@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "nx": {
     "includedScripts": []
@@ -53,6 +53,7 @@
     "@types/react": "19.0.0",
     "@types/react-dom": "19.0.0",
     "@types/redux-mock-store": "^1.5.0",
+    "axios-mock-adapter": "^2.1.0",
     "babel-jest": "^29.7.0",
     "cypress": "^13.13.0",
     "eslint": "^9.8.0",
