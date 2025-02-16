@@ -6,8 +6,8 @@ export const COOKIE_KEYS = {
   token: 'token',
   username: 'username',
 };
-export const API_DOMAIN = 'http://localhost:3000';
-export const WEBSOCKET_BASE_URL = 'ws://localhost:3000/cable';
+export const API_DOMAIN = process.env.NX_PUBLIC_API_DOMAIN;
+export const WEBSOCKET_BASE_URL = process.env.NX_PUBLIC_WEBSOCKET_BASE_URL;
 export const API_STATUSES = {
   loading: 'loading',
   succeeded: 'succeeded',

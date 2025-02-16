@@ -1,5 +1,5 @@
 [build]
-  command = "cd frontend && yarn && yarn build"
+  command = "cd frontend && cp .env.production .env && yarn && yarn build"
   publish = "frontend/dist/frontend"
 
 [[redirects]]
