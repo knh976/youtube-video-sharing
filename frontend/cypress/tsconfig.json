@@ -2,7 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "allowJs": true,
-    "outDir": "../dist/out-tsc",
+    "outDir": "./dist/out-tsc",
     "module": "commonjs",
     "types": ["cypress", "node"],
     "sourceMap": false
@@ -10,11 +10,11 @@
   "include": [
     "**/*.ts",
     "**/*.js",
-    "cypress.config.ts",
-    "**/*.cy.ts",
-    "**/*.cy.tsx",
-    "**/*.cy.js",
-    "**/*.cy.jsx",
-    "**/*.d.ts"
+    "../cypress.config.ts",
+    "../**/*.cy.ts",
+    "../**/*.cy.tsx",
+    "../**/*.cy.js",
+    "../**/*.cy.jsx",
+    "../**/*.d.ts"
   ]
 }

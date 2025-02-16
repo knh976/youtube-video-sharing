@@ -49,6 +49,7 @@ const Share = () => {
                   </Grid>
                   <Grid item xs={8}>
                     <TextField
+                      name="url"
                       label="url"
                       size="small"
                       fullWidth
@@ -61,6 +62,7 @@ const Share = () => {
                   <Grid xs={3} />
                   <Grid item xs={8}>
                     <Button
+                      data-testid="share-button"
                       variant="outlined"
                       fullWidth
                       onClick={onClickShare}

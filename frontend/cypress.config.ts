@@ -4,13 +4,10 @@ import { defineConfig } from 'cypress';
 export default defineConfig({
   e2e: {
     ...nxE2EPreset(__filename, {
-      cypressDir: 'src',
+      cypressDir: 'cypress',
       webServerCommands: {
-        default: 'yarn nx run frontend:serve',
-        production: 'yarn nx run frontend:serve-static',
+        default: 'nx run frontend:serve',
       },
-      ciWebServerCommand: 'yarn nx run frontend:serve-static',
-      ciBaseUrl: 'http://localhost:4200',
     }),
     baseUrl: 'http://localhost:4200',
   },
