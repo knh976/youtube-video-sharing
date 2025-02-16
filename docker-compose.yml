@@ -1,0 +1,64 @@
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: youtube_video_sharing_development
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:6
+    ports:
+      - "6379:6379"
+
+  rails:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/youtube_video_sharing_development
+      REDIS_URL: redis://redis:6379/1
+    depends_on:
+      - postgres
+      - redis
+    command: bash -c "cd backend && bundle exec rails db:create db:migrate && bundle exec rails s -b '0.0.0.0'"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - gems_cache:/usr/local/bundle
+
+  sidekiq:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/youtube_video_sharing_development
+      REDIS_URL: redis://redis:6379/1
+    depends_on:
+      - postgres
+      - redis
+    command: bash -c "cd backend && bundle exec sidekiq"
+    volumes:
+      - .:/app
+      - gems_cache:/usr/local/bundle
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    command: bash -c "cd frontend && yarn && yarn start"
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+      - node_modules_cache:/app/frontend/node_modules
+
+volumes:
+  postgres_data:
+  gems_cache:
+  node_modules_cache:

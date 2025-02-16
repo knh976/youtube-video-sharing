@@ -20,8 +20,8 @@ $ brew install git
 ```
 
 ### Postgres
-```angular2html
-$ brew install postgres
+```
+$ brew install postgresql@16
 ```
 
 ### Redis
@@ -50,36 +50,41 @@ Clone the repository and install the dependencies:
 ```
 $ git clone https://github.com/knh976/youtube-video-sharing.git
 $ cd youtube-video-sharing
-$ cd backend
-$ bundle install
-$ cd ../
 $ cd frontend
 $ yarn install
+$ cp .env.development .env
+$ cd ../
+$ cd backend
+$ bundle install
+$ cp config/application.yml.example config/application.yml
+$ cd ../
 ```
 
 
 # Database Setup
 Start the Postgres:
 ```
-$ brew services start postgres
+$ brew services start postgresql@16
 ```
 
-Create the databases:
+Create the databases and run migration:
 ```
-$ bundle exec rails db:create
+$ cd backend
+$ bundle exec rails db:create db:migrate
+$ cd ../
 ```
-
-Run migration:
-```
-$ bundle exec rails db:migrate
-```
-
 
 # Running the Application
-Start the development server
+Start the development server with a traditional method:
 ```
 $ chmod +x bin/start.sh
 $ bin/start.sh
+```
+
+Start the development server with docker compose:
+[Install Docker for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+```
+$ docker compose up --build
 ```
 
 Run tests
@@ -87,10 +92,6 @@ Run tests
 $ chmod +x bin/test.sh
 $ bin/test.sh
 ```
-
-
-# Docker Deployment
-
 
 # Usage
 You can access the app by visiting http://localhost:4200
