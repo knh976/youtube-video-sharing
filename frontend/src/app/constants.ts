@@ -7,6 +7,7 @@ export const COOKIE_KEYS = {
   username: 'username',
 };
 export const API_DOMAIN = 'http://localhost:3000';
+export const WEBSOCKET_BASE_URL = 'ws://localhost:3000/cable';
 export const API_STATUSES = {
   loading: 'loading',
   succeeded: 'succeeded',

@@ -10,6 +10,7 @@ import ListMovies from './components/ListMovies';
 import useUser from './hooks/useUser';
 import { useAppDispatch } from './hooks/useApp';
 import { setLoggedIn } from './reducers/user';
+import Notification from "./components/Notification";
 
 export function App() {
   const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ export function App() {
   return (
     <div className={styles.root}>
       <Header>{isAuth ? <HeaderLoggedIn /> : <HeaderLogin />}</Header>
+      <Notification />
       <Routes>
         <Route path={ROUTES.home} element={<ListMovies />} />
         <Route path={ROUTES.share} element={<Share />} />
