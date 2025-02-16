@@ -15,6 +15,7 @@ export const shareMovie = createAsyncThunk(
       { url },
       {
         headers: {
+          'Content-Type': 'application/json',
           Authorization: getToken(),
         },
       }

@@ -87,4 +87,9 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  config.action_cable.url = 'wss://your-heroku-app.herokuapp.com/cable'
+  config.action_cable.allowed_request_origins = [
+    'https://lucent-faun-5c1337.netlify.app',
+  ]
 end
