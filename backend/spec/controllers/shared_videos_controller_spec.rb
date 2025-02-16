@@ -11,6 +11,7 @@ RSpec.describe SharedVideosController, type: :controller do
         url: 'https://youtu.be/wJnBTPUQS5A',
       }
     end
+    let!(:shared_video) { create(:shared_video) }
 
     context 'not authorized' do
       let(:headers) { {} }
@@ -36,12 +37,14 @@ RSpec.describe SharedVideosController, type: :controller do
             double(
               call: nil,
               success?: true,
-              data: double
+              data: shared_video
             )
           )
       end
 
       it 'responses 200' do
+        expect(SharedVideosNotificationsJob).to receive(:perform_async).with(shared_video.id)
+
         post path, headers: headers, params: params.to_json
 
         expect(response).to have_http_status(:ok)
@@ -72,5 +75,4 @@ RSpec.describe SharedVideosController, type: :controller do
       expect(response_body).to eq []
     end
   end
-
 end

@@ -6,6 +6,7 @@ class SharedVideosController < ApplicationController
     service.call
 
     if service.success?
+      SharedVideosNotificationsJob.perform_async(service.data.id)
       render json: service.data, status: :ok
     else
       render json: { error_message: service.errors.first.message }, status: :bad_request
