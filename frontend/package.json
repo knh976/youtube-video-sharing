@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --silent",
     "e2e": "npx nx run frontend:e2e --browser chrome --headed"
   },
   "nx": {
